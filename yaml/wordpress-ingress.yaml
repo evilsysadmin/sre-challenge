@@ -1,0 +1,17 @@
+apiVersion: networking.k8s.io/v1
+kind: Ingress
+metadata:
+  name: wordpress
+spec:
+  rules:
+  - host: wordpress.mydomain.com
+    http:
+      paths:
+      - backend:
+          service:
+            name: wordpress
+            port:
+              number: 8080
+        path: /
+        pathType: Prefix
+

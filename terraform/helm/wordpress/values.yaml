@@ -1,0 +1,41 @@
+image:
+  registry: docker.io
+  repository: bitnami/wordpress
+  tag: 6.1.1-debian-11-r34
+  
+multisite:
+  enable: false
+  host: ""
+  networkType: subdomain
+  enableNipIoRedirect: false
+
+replicaCount: 2
+
+externalDatabase:
+  port: 3306
+  user: default
+  database: bitnami_wordpress
+
+resources:
+  limits: {}
+  requests:
+    memory: 512Mi
+    cpu: 300m
+
+service:
+  name: wpdb
+  type: LoadBalancer
+  ports:
+    http: 80
+    https: 443
+  httpsTargetPort: https
+
+ingress:
+  enabled: true
+  pathType: ImplementationSpecific
+  hostname: mydomain.com
+  path: /
+  tls: true
+
+mariadb:
+  enabled: false
